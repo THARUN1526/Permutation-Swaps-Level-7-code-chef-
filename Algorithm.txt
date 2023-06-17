@@ -1,0 +1,31 @@
+
+1. Read the number of test cases from the input.
+2. For each test case:
+   - Read the size of the sequence, `n`, from the input.
+   - Read the elements of the sequence, `a`, as a list of integers from the input.
+   - Read the permutation array, `p`, as a list of integers from the input. Subtract 1 from each element to make it 0-indexed.
+   - Initialize empty lists: `cycles`, `vis`, and `idInC`.
+   - Iterate over the range `n`:
+     - If the current element hasn't been visited (`vis[i] == -1`), start a new cycle.
+     - Append the current element to the `cycles` list.
+     - Add an empty dictionary to the `idInC` list.
+     - Set the initial index of the current element in the cycle to 0.
+     - Set the visited status of the current element to the index of the cycle it belongs to (`vis[i] = len(cycles) - 1`).
+     - Follow the permutation to trace the current cycle, updating the indices and visited status accordingly.
+   - Initialize the `steps` variable to 0.
+   - Read the number of queries, `q`, from the input.
+   - Iterate over the range `q`:
+     - Read a query as a list of integers, `inp`, from the input.
+     - If the first element of the query is 1, increment the `steps` counter.
+     - If the first element of the query is 3:
+       - Retrieve the position from the query (`pos`) and subtract 1 to make it 0-indexed.
+       - Find the cycle index that contains the position (`ind`) using the `vis` list.
+       - Get the index of the position within its cycle (`cid`) from the `idInC` dictionary.
+       - Update `cid` by subtracting `steps` and taking the modulus of the cycle length to handle rotation.
+       - Retrieve the element at the updated index from the sequence `a` and print it.
+     - If the first element of the query is 2:
+       - Retrieve two positions, `pos1` and `pos2`, from the query and subtract 1 to make them 0-indexed.
+       - Find the cycle indices and indices within the cycles (`ind1`, `cid1`, `ind2`, `cid2`) for the two positions using `vis` and `idInC`.
+       - Update `cid1` and `cid2` by subtracting `steps` and taking the modulus of their respective cycle lengths.
+       - Swap the elements at the updated indices in the sequence `a`.
+
